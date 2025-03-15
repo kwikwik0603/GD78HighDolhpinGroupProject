@@ -576,12 +576,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 798350e9ffc2e0f4b897375f1564a831, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
-  groundDrag: 0
-  playerHeight: 0
+  moveSpeed: 7
+  groundDrag: 3
+  playerHeight: 2
   ground:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
+  jumpForce: 12
+  jumpCoolDown: 0.25
+  airMultiplier: 0.2
+  jumpKey: 32
   orientation: {fileID: 1151765991}
 --- !u!1 &832575517
 GameObject:
@@ -784,7 +788,6 @@ GameObject:
   - component: {fileID: 964370673}
   - component: {fileID: 964370672}
   - component: {fileID: 964370671}
-  - component: {fileID: 964370674}
   m_Layer: 0
   m_Name: PlayerObj
   m_TagString: Untagged
@@ -883,25 +886,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 964370669}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &964370674
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 964370669}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 798350e9ffc2e0f4b897375f1564a831, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 7
-  groundDrag: 5
-  playerHeight: 2
-  ground:
-    serializedVersion: 2
-    m_Bits: 64
-  orientation: {fileID: 1151765991}
 --- !u!1 &974509202
 GameObject:
   m_ObjectHideFlags: 0

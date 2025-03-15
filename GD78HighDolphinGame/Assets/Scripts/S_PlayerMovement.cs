@@ -1,8 +1,11 @@
+using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 
 public class S_PlayerMovement : MonoBehaviour
 {
     [Header ("Movement")]
+    float horInput;
+    float verInput;
     public float moveSpeed;
     public float groundDrag;
 
@@ -11,11 +14,16 @@ public class S_PlayerMovement : MonoBehaviour
     public LayerMask ground;
     bool grounded;
 
+    [Header("Jumping")]
+    public float jumpForce;
+    public float jumpCoolDown;
+    public float airMultiplier;
+    bool readyToJump = true;
+
+    [Header("Keybinds")]
+    public KeyCode jumpKey = KeyCode.Space;
+
     public Transform orientation;
-
-    float horInput;
-    float verInput;
-
     Vector3 moveDirection;
     Rigidbody rb;
 
@@ -52,12 +60,27 @@ public class S_PlayerMovement : MonoBehaviour
     {
         horInput = Input.GetAxisRaw("Horizontal");
         verInput = Input.GetAxisRaw("Vertical");
+
+        //to jump
+        if(Input.GetKey(jumpKey) && readyToJump && grounded)
+        {
+            readyToJump = false;
+            Jump();
+            Invoke(nameof(ResetJump), jumpCoolDown);
+        }
     }
 
     private void MovePlayer()
     {
         moveDirection = orientation.forward * verInput + orientation.right * horInput;
-        rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
+        if (grounded)
+        {
+            rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
+        }
+        else if(!grounded)
+        {
+            rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
+        }
     }
 
     private void SpeedControl()
@@ -71,4 +94,16 @@ public class S_PlayerMovement : MonoBehaviour
         }
 
     }
+
+    private void Jump()
+    {
+        rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
+        rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+    }
+
+    private void ResetJump()
+    {
+        readyToJump = true;
+    }
+
 }
