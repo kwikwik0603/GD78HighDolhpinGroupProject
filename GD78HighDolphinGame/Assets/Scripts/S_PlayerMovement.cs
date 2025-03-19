@@ -38,6 +38,8 @@ public class S_PlayerMovement : MonoBehaviour
     {
         MovePlayer();
     }
+
+
     // Update is called once per frame
     void Update()
     {
@@ -53,6 +55,11 @@ public class S_PlayerMovement : MonoBehaviour
         else
         {
             rb.linearDamping = 0;
+        }
+
+        if (Input.GetKeyDown(KeyCode.L)) // Press 'L' to launch diagonally
+        {
+            LaunchPlayer(new Vector3(1, 1, 0), 15f);
         }
     }
 
@@ -104,6 +111,11 @@ public class S_PlayerMovement : MonoBehaviour
     private void ResetJump()
     {
         readyToJump = true;
+    }
+
+    void LaunchPlayer(Vector3 direction, float force)
+    {
+        rb.AddForce(direction.normalized * force, ForceMode.Impulse);
     }
 
 }
