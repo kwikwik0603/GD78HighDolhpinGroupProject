@@ -1,3 +1,7 @@
+/*
+This script is for character movement -  moving, jumping, launching etc.
+ */
+
 using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 
@@ -27,9 +31,10 @@ public class S_PlayerMovement : MonoBehaviour
     Vector3 moveDirection;
     Rigidbody rb;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    
     void Start()
     {
+        // Start is called once before the first execution of Update after the MonoBehaviour is created
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
     }
@@ -38,17 +43,17 @@ public class S_PlayerMovement : MonoBehaviour
     {
         MovePlayer();
     }
-
-
-    // Update is called once per frame
+    
     void Update()
     {
+        // Update is called once per frame
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, ground);
         
         MyInput();
         SpeedControl();
+        //FAroundandFindOut();
 
-        if(grounded)
+        if (grounded)
         {
             rb.linearDamping = groundDrag;
         }
@@ -59,12 +64,13 @@ public class S_PlayerMovement : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.L)) // Press 'L' to launch diagonally
         {
-            LaunchPlayer(new Vector3(1, 1, 0), 15f);
+            LaunchPlayer(orientation.forward, 15f);
         }
     }
 
     private void MyInput()
     {
+        //Gets input from the user.
         horInput = Input.GetAxisRaw("Horizontal");
         verInput = Input.GetAxisRaw("Vertical");
 
@@ -79,6 +85,7 @@ public class S_PlayerMovement : MonoBehaviour
 
     private void MovePlayer()
     {
+        //applying force to the character and moving it
         moveDirection = orientation.forward * verInput + orientation.right * horInput;
         if (grounded)
         {
@@ -92,6 +99,7 @@ public class S_PlayerMovement : MonoBehaviour
 
     private void SpeedControl()
     {
+        //limiting the speed of the character to a certain number.
         Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
 
         if (flatVel.magnitude > moveSpeed)
@@ -104,12 +112,14 @@ public class S_PlayerMovement : MonoBehaviour
 
     private void Jump()
     {
+        //launch the character into the air for jumping
         rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
         rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
     }
 
     private void ResetJump()
     {
+        //reset the value of the readyToJump variable
         readyToJump = true;
     }
 
@@ -118,4 +128,8 @@ public class S_PlayerMovement : MonoBehaviour
         rb.AddForce(direction.normalized * force, ForceMode.Impulse);
     }
 
+    private void FAroundandFindOut()
+    {
+        Debug.Log(orientation.forward);
+    }
 }

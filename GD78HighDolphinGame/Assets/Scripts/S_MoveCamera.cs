@@ -1,3 +1,7 @@
+/*
+This script is to move the camera along with the player.
+*/
+
 using UnityEngine;
 
 public class S_MoveCamera : MonoBehaviour

@@ -1,3 +1,6 @@
+/*
+This script is for panning and tilting the camera from the first person perspective.
+*/
 using UnityEngine;
 
 public class S_PlayerCam : MonoBehaviour
