@@ -70,9 +70,10 @@ public class S_PlayerMovement : MonoBehaviour
 
     private void MyInput()
     {
-        //Gets input from the user.
+
         horInput = Input.GetAxisRaw("Horizontal");
         verInput = Input.GetAxisRaw("Vertical");
+
 
         //to jump
         if(Input.GetKey(jumpKey) && readyToJump && grounded)
