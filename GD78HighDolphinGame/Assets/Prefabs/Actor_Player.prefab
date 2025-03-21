@@ -253,7 +253,7 @@ MonoBehaviour:
   playerHeight: 2
   ground:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 0
   jumpForce: 12
   jumpCoolDown: 0.25
   airMultiplier: 0.2
@@ -271,6 +271,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cec09257a4635ca47ab2220014a1a6f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  grenadePrefab: {fileID: 829250410153594573, guid: f12e15419b0270d44a3c1f1e5519eec0, type: 3}
+  grenadePrefab: {fileID: 829250410153594573, guid: f12e15419b0270d44a3c1f1e5519eec0,
+    type: 3}
   throwPoint: {fileID: 0}
   throwForce: 15
+  orientation: {fileID: 0}

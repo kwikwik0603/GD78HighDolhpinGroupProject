@@ -99,7 +99,7 @@
                     "name": "Inventory Next",
                     "type": "Button",
                     "id": "98c0547a-0a5e-484e-ba12-a7812face9b0",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
